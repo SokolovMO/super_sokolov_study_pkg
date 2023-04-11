@@ -1,0 +1,22 @@
+<launch>
+
+    <group ns="launch_ns">
+
+        <node name="polynominal_node" pkg="super_sokolov_study_pkg" type="polynominal_node.py" output="screen">
+            <remap from="input_topic" to="input_numbers"/>
+            <remap from="output_topic" to="powered_numbers"/>
+        </node>
+
+        <node name="summing_node" pkg="super_sokolov_study_pkg" type="summing_node.py" output="screen">
+            <remap from="input_topic" to="powered_numbers"/>
+            <remap from="output_topic" to="summed_numbers"/>
+        </node>
+
+    </group>
+
+    <node name="request_node" pkg="super_sokolov_study_pkg" type="request_node.py" output="screen">
+        <remap from="input_topic" to="launch_ns/summed_numbers"/>
+        <remap from="output_topic" to="launch_ns/input_numbers"/>
+    </node>
+
+</launch>
